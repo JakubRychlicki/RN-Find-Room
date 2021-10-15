@@ -1,21 +1,21 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+import Constants from "expo-constants";
+import firebase from "firebase/app";
+
+if (firebase.apps.length == 0) {
+  firebase.initializeApp(Constants.manifest.web.config.firebase);
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+import { Provider } from "react-redux";
+import { store } from "./redux";
+
+import Navigation from "./navigation";
+
+export default App = () => {
+  return (
+    <Provider store={store}>
+      <Navigation />
+    </Provider>
+  );
+};
