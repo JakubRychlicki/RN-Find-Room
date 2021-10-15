@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
-import { AppStyles } from "../../constants/Colors";
+import { AppStyles } from "../../constants/AppStyles";
 
 const Button = (props) => {
   return (

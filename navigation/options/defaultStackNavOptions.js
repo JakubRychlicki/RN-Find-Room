@@ -1,4 +1,4 @@
-import { AppStyles } from "../../constants/Colors";
+import { AppStyles } from "../../constants/AppStyles";
 
 export default defaultNavOptions = {
   headerStyle: {

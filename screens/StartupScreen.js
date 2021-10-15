@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View, Image, ActivityIndicator } from "react-native";
 
-import { AppStyles } from "../constants/Colors";
+import { AppStyles } from "../constants/AppStyles";
 
 const StartupScreen = () => {
   return (

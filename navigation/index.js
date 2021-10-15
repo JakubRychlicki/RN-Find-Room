@@ -1,4 +1,3 @@
-import firebase from "firebase";
 import React, { useState, useEffect } from "react";
 import { StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
@@ -7,7 +6,7 @@ import StartupScreen from "../screens/StartupScreen";
 import MainNavigator from "./main/MainNavigator";
 
 import { useDispatch } from "react-redux";
-import { loadPosts } from "../redux/actions/posts";
+import { fetchPosts, fetchImagesPosts } from "../redux/actions/posts";
 
 const AppNavigation = () => {
   const dispatch = useDispatch();
@@ -15,16 +14,8 @@ const AppNavigation = () => {
 
   const loadData = async () => {
     setIsLoading(true);
-    const postsRef = firebase.firestore().collection("posts");
-
-    const posts = await postsRef.get().then((snapshot) => {
-      let all_posts = snapshot.docs.map((doc) => {
-        const data = doc.data();
-        const id = doc.id;
-        return { id, ...data };
-      });
-      dispatch(loadPosts(all_posts));
-    });
+    await dispatch(fetchPosts());
+    await dispatch(fetchImagesPosts());
     setIsLoading(false);
   };
 

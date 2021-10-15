@@ -3,7 +3,7 @@ import { StatusBar } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { Ionicons } from "@expo/vector-icons";
 
-import { AppStyles } from "../../constants/Colors";
+import { AppStyles } from "../../constants/AppStyles";
 
 import RoomsNavigator from "../rooms/RoomsNavigator";
 
