@@ -44,11 +44,7 @@ export const fetchImagesPosts = (postId) => {
         .collection("images");
 
       const images_ = await postImagesRef.get().then((snapshot) => {
-        let images = snapshot.docs.map((doc) => {
-          const data = doc.data();
-          const id = doc.id;
-          return { id, ...data };
-        });
+        let images = snapshot.docs.map((doc) => doc.data().downloadURL);
         dispatch(loadImagesToPosts(posts[i].id, images));
       });
     }

@@ -5,9 +5,11 @@ import defaultStackNavOptions from "../options/defaultStackNavOptions";
 
 import RoomsOverviewScreen, {
   screenOptions as RoomsOverviewScreenOptions,
-} from "../../screens/main/rooms/RoomsOverview";
+} from "../../screens/main/rooms/RoomOverview";
 
-import RoomDetailScreen from "../../screens/main/rooms/RoomsOverview";
+import RoomDetailScreen, {
+  screenOptions as RoomDetailScreenOptions,
+} from "../../screens/main/rooms/RoomDetail";
 
 const Stack = createStackNavigator();
 
@@ -19,7 +21,11 @@ export default RoomsNavigator = () => {
         component={RoomsOverviewScreen}
         options={RoomsOverviewScreenOptions}
       />
-      <Stack.Screen name="RoomDetail" component={RoomDetailScreen} />
+      <Stack.Screen
+        name="RoomDetail"
+        component={RoomDetailScreen}
+        options={RoomDetailScreenOptions}
+      />
     </Stack.Navigator>
   );
 };
