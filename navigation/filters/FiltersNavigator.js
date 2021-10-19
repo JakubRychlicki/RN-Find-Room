@@ -3,19 +3,19 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import defaultStackNavOptions from "../options/defaultStackNavOptions";
 
-import AuthScreen, {
-  screenOptions as AuthScreenOptions,
-} from "../../screens/auth/Auth";
+import FiltersScreen, {
+  screenOptions,
+} from "../../screens/main/filters/Filters";
 
 const Stack = createStackNavigator();
 
-export default AuthNavigator = () => {
+export default FiltersNavigator = () => {
   return (
     <Stack.Navigator screenOptions={defaultStackNavOptions}>
       <Stack.Screen
-        name="Auth"
-        component={AuthScreen}
-        options={AuthScreenOptions}
+        name="Filters"
+        component={FiltersScreen}
+        options={screenOptions}
       />
     </Stack.Navigator>
   );

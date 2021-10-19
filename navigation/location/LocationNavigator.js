@@ -3,19 +3,19 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import defaultStackNavOptions from "../options/defaultStackNavOptions";
 
-import AuthScreen, {
-  screenOptions as AuthScreenOptions,
-} from "../../screens/auth/Auth";
+import LocationAddScreen, {
+  screenOptions,
+} from "../../screens/main/location/LocationAdd";
 
 const Stack = createStackNavigator();
 
-export default AuthNavigator = () => {
+export default LocationNavigator = () => {
   return (
     <Stack.Navigator screenOptions={defaultStackNavOptions}>
       <Stack.Screen
-        name="Auth"
-        component={AuthScreen}
-        options={AuthScreenOptions}
+        name="LocationAdd"
+        component={LocationAddScreen}
+        options={screenOptions}
       />
     </Stack.Navigator>
   );
