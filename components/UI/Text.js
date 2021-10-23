@@ -4,7 +4,10 @@ import { AppStyles } from "../../constants/AppStyles";
 
 export const Text_Roboto = (props) => {
   return (
-    <Text style={[{ fontFamily: AppStyles.fontFamily.regular }, props.style]}>
+    <Text
+      {...props}
+      style={[{ fontFamily: AppStyles.fontFamily.regular }, props.style]}
+    >
       {props.children}
     </Text>
   );
@@ -12,7 +15,10 @@ export const Text_Roboto = (props) => {
 
 export const Text_Roboto_Medium = (props) => {
   return (
-    <Text style={[{ fontFamily: AppStyles.fontFamily.medium }, props.style]}>
+    <Text
+      {...props}
+      style={[{ fontFamily: AppStyles.fontFamily.medium }, props.style]}
+    >
       {props.children}
     </Text>
   );
@@ -20,7 +26,10 @@ export const Text_Roboto_Medium = (props) => {
 
 export const Text_Roboto_Thin = (props) => {
   return (
-    <Text style={[{ fontFamily: AppStyles.fontFamily.thin }, props.style]}>
+    <Text
+      {...props}
+      style={[{ fontFamily: AppStyles.fontFamily.thin }, props.style]}
+    >
       {props.children}
     </Text>
   );

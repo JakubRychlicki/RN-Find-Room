@@ -1,13 +1,16 @@
 import React from "react";
-import { StyleSheet, Text, View, TextInput } from "react-native";
+import { StyleSheet, View, TextInput } from "react-native";
+import { Text_Roboto_Medium } from "./Text";
 
 import { AppStyles } from "../../constants/AppStyles";
 
 const Input = (props) => {
   return (
-    <View style={{ width: props.width }}>
-      <Text style={styles.label}>{props.title}</Text>
-      <TextInput style={styles.input} onChangeText={props.onChangeText} />
+    <View style={[{ width: props.width }, props.styles]}>
+      <Text_Roboto_Medium style={styles.label}>
+        {props.title}
+      </Text_Roboto_Medium>
+      <TextInput style={styles.input} {...props} />
     </View>
   );
 };

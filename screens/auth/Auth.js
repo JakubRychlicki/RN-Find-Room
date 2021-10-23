@@ -26,7 +26,8 @@ export const AuthTabNavigator = () => {
           style: {
             elevation: 0,
             marginTop: 20,
-            marginHorizontal: 20,
+            width: AppStyles.textInputWidth.main,
+            alignSelf: "center",
           },
         }}
       >

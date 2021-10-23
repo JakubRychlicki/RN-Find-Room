@@ -1,5 +1,6 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
+import { Text_Roboto_Bold } from "./Text";
 
 import { AppStyles } from "../../constants/AppStyles";
 
@@ -7,9 +8,16 @@ const Button = (props) => {
   return (
     <TouchableOpacity
       onPress={props.onPress}
-      style={[styles.buttonBox, props.style]}
+      disabled={props.disabled}
+      style={
+        props.disabled
+          ? { ...styles.buttonBox, ...styles.disabledBtn, ...props.styles }
+          : { ...styles.buttonBox, ...props.styles }
+      }
     >
-      <Text style={styles.text}>{props.title}</Text>
+      <Text_Roboto_Bold style={[styles.text, { fontSize: props.size }]}>
+        {props.title}
+      </Text_Roboto_Bold>
     </TouchableOpacity>
   );
 };
@@ -28,5 +36,8 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: AppStyles.fontSize.content,
     fontWeight: "bold",
+  },
+  disabledBtn: {
+    backgroundColor: "gray",
   },
 });

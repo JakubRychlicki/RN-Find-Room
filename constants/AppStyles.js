@@ -63,6 +63,6 @@ export const AppStyles = {
     auth: Layout.window.width * 0.5,
   },
   textInputWidth: {
-    main: Layout.window.width * 0.8,
+    main: Layout.window.width * 0.85,
   },
 };
