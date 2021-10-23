@@ -1,3 +1,4 @@
+import firebase from "firebase";
 import React, { createRef, useCallback } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import {
@@ -10,7 +11,7 @@ import { Formik, ErrorMessage } from "formik";
 
 import Input from "../../components/UI/Input";
 import Button from "../../components/UI/Button";
-import ErrorInput from "../../components/UI/ErrorInput";
+import ErrorText from "../../components/UI/ErrorText";
 
 import validationSchema from "../../services/validation/registerValidation";
 
@@ -45,7 +46,21 @@ const Register = () => {
           initialValues={initialValues}
           validationSchema={validationSchema}
           onSubmit={(values) => {
-            console.log(values);
+            const { email, password, name, phoneNumber } = values;
+            firebase
+              .auth()
+              .createUserWithEmailAndPassword(email, password)
+              .then((result) => {
+                firebase
+                  .firestore()
+                  .collection("users")
+                  .doc(firebase.auth().currentUser.uid)
+                  .set({
+                    name,
+                    email,
+                    phoneNumber,
+                  });
+              });
           }}
         >
           {({ handleChange, handleSubmit, values, isValid, dirty }) => (
@@ -57,7 +72,7 @@ const Register = () => {
                 onChangeText={handleChange("name")}
                 value={values.name}
               />
-              <ErrorMessage component={ErrorInput} name="name" />
+              <ErrorMessage component={ErrorText} name="name" />
               <Input
                 styles={styles.input}
                 width={AppStyles.textInputWidth.main}
@@ -66,7 +81,7 @@ const Register = () => {
                 onChangeText={handleChange("email")}
                 value={values.email}
               />
-              <ErrorMessage component={ErrorInput} name="email" />
+              <ErrorMessage component={ErrorText} name="email" />
               <Input
                 styles={styles.input}
                 width={AppStyles.textInputWidth.main}
@@ -75,7 +90,7 @@ const Register = () => {
                 value={values.password}
                 secureTextEntry={true}
               />
-              <ErrorMessage component={ErrorInput} name="password" />
+              <ErrorMessage component={ErrorText} name="password" />
               <Input
                 styles={styles.input}
                 width={AppStyles.textInputWidth.main}
@@ -84,7 +99,7 @@ const Register = () => {
                 onChangeText={handleChange("phoneNumber")}
                 value={values.phoneNumber}
               />
-              <ErrorMessage component={ErrorInput} name="phoneNumber" />
+              <ErrorMessage component={ErrorText} name="phoneNumber" />
               <Button
                 title="Załóż konto"
                 disabled={!(isValid && dirty)}

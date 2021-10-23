@@ -1,3 +1,4 @@
+import firebase from "firebase";
 import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { Ionicons } from "@expo/vector-icons";
@@ -6,6 +7,8 @@ import RoomsNavigator from "../rooms/RoomsNavigator";
 import FiltersNavigator from "../filters/FiltersNavigator";
 import LocationNavigator from "../location/LocationNavigator";
 import AuthNavigator from "../auth/AuthNavigator";
+
+import Logout from "../../screens/auth/Logout";
 
 import defaultDrawerContentOptions from "../options/defaultDrawerContentOptions";
 
@@ -44,16 +47,29 @@ export default MainNavigator = () => {
           ),
         }}
       />
-      <Drawer.Screen
-        name="MainAuth"
-        component={AuthNavigator}
-        options={{
-          drawerLabel: "Zaloguj się",
-          drawerIcon: (props) => (
-            <Ionicons name="person" size={23} color={props.color} />
-          ),
-        }}
-      />
+      {firebase.auth().currentUser == null ? (
+        <Drawer.Screen
+          name="MainAuth"
+          component={AuthNavigator}
+          options={{
+            drawerLabel: "Zaloguj się",
+            drawerIcon: (props) => (
+              <Ionicons name="person" size={23} color={props.color} />
+            ),
+          }}
+        />
+      ) : (
+        <Drawer.Screen
+          name="Logout"
+          component={Logout}
+          options={{
+            drawerLabel: "Wyloguj się",
+            drawerIcon: (props) => (
+              <Ionicons name="person" size={23} color={props.color} />
+            ),
+          }}
+        />
+      )}
     </Drawer.Navigator>
   );
 };

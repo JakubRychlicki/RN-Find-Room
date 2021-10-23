@@ -1,3 +1,4 @@
+import firebase from "firebase";
 import React, { useState, useEffect } from "react";
 import { StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
@@ -20,7 +21,13 @@ const AppNavigation = () => {
   };
 
   useEffect(() => {
-    loadData();
+    firebase.auth().onAuthStateChanged((user) => {
+      if (!user) {
+        loadData();
+      } else {
+        loadData();
+      }
+    });
   }, []);
 
   return (

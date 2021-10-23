@@ -1,22 +1,21 @@
-import React, { useCallback, createRef } from "react";
+import firebase from "firebase";
+import React, { useState, useCallback, createRef } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import { StyleSheet, View } from "react-native";
 import { Formik } from "formik";
-import * as yup from "yup";
 
 import Input from "../../components/UI/Input";
 import Button from "../../components/UI/Button";
+import ErrorText from "../../components/UI/ErrorText";
+
+import validationSchema from "../../services/validation/loginValidation";
 
 import { AppStyles } from "../../constants/AppStyles";
-
-const validationSchema = yup.object().shape({
-  email: yup.string().email().required(),
-  password: yup.string().min(5).required(),
-});
 
 const initialValues = { email: "", password: "" };
 
 const Login = () => {
+  const [loginError, setLoginError] = useState(false);
   const formikRef = createRef();
 
   useFocusEffect(
@@ -34,7 +33,12 @@ const Login = () => {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={(values) => {
-          console.log(values);
+          const { email, password } = values;
+          firebase
+            .auth()
+            .signInWithEmailAndPassword(email, password)
+            .then(() => {})
+            .catch((err) => setLoginError(true));
         }}
       >
         {({ handleChange, handleSubmit, values, isValid, dirty }) => (
@@ -55,6 +59,11 @@ const Login = () => {
               value={values.password}
               secureTextEntry={true}
             />
+            {loginError ? (
+              <ErrorText align="center">
+                Nieprawidłowy email lub hasło.
+              </ErrorText>
+            ) : null}
             <Button
               title="Zaloguj się"
               disabled={!(isValid && dirty)}
@@ -81,7 +90,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   input: {
-    paddingBottom: 20,
+    paddingBottom: 10,
   },
   submitBtn: {
     width: AppStyles.buttonWidth.auth,
