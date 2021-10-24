@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
   },
   submitBtn: {
     marginTop: 10,
-    width: AppStyles.buttonWidth.auth,
+    width: AppStyles.buttonWidth.half,
     alignSelf: "center",
   },
 });

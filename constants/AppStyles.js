@@ -33,6 +33,7 @@ export const AppStyles = {
     phoneNum: grays.gray900,
     date: grays.gray400,
     label: grays.gray800,
+    filterLabelColor: grays.gray800,
     iconFavColor: pink.pink600,
     grayBg: grays.gray100,
     inputBg: pink.pink100,
@@ -43,6 +44,10 @@ export const AppStyles = {
     dotSlider: pink.pink500,
     inactiveDotSlider: grays.gray400,
     dividerColor: grays.gray400,
+    sliderLabelPriceBg: pink.pink100,
+    sliderSelectedColor: pink.pink300,
+    sliderUnselectedColor: grays.gray100,
+    sliderMarkerColor: pink.pink500,
   },
   fontSize: {
     title: 20,
@@ -60,7 +65,7 @@ export const AppStyles = {
     main: Layout.window.width * 0.85,
   },
   buttonWidth: {
-    auth: Layout.window.width * 0.5,
+    half: Layout.window.width * 0.5,
   },
   textInputWidth: {
     main: Layout.window.width * 0.85,
