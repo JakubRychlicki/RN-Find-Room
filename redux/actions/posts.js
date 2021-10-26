@@ -50,3 +50,10 @@ export const fetchImagesPosts = (postId) => {
     }
   };
 };
+
+export const setFilters = (filterSettings) => {
+  return {
+    type: actionsTypes.SET_FILTERED_POSTS,
+    filters: filterSettings,
+  };
+};

@@ -9,7 +9,7 @@ import { AppStyles } from "../../../constants/AppStyles";
 import { useSelector } from "react-redux";
 
 const RoomsOverview = ({ navigation }) => {
-  const posts = useSelector((state) => state.posts.posts);
+  const posts = useSelector((state) => state.posts.filteredPosts);
 
   const selectItemHandler = (id) => {
     navigation.navigate("RoomDetail", {

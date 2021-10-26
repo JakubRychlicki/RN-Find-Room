@@ -21,7 +21,7 @@ export default MainNavigator = () => {
         name="MainRooms"
         component={RoomsNavigator}
         options={{
-          drawerLabel: "Pokoje",
+          drawerLabel: "Ogłoszenia",
           drawerIcon: (props) => (
             <Ionicons name="home" size={23} color={props.color} />
           ),

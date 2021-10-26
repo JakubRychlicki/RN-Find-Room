@@ -1,5 +1,12 @@
-import React, { useState, useLayoutEffect } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import React, { useState, useCallback, useLayoutEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ActivityIndicator,
+} from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../../../components/UI/HeaderButton";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
@@ -12,12 +19,24 @@ import {
 import Button from "../../../components/UI/Button";
 
 import { AppStyles } from "../../../constants/AppStyles";
+import { setFilters } from "../../../redux/actions/posts";
 
 const Filters = ({ navigation }) => {
-  const [minPrice, setMinPrice] = useState("0");
-  const [maxPrice, setMaxPrice] = useState("1000");
+  const dispatch = useDispatch();
+
+  const rooms = useSelector((state) => state.posts.posts);
+  const prices = rooms.map((r) => r.price);
+  const locations = [...new Set(rooms.map((r) => r.city))].sort((a, b) =>
+    a.localeCompare(b)
+  );
+
+  const defaultMinPrice = Math.min(...prices);
+  const defaultMaxPrice = Math.max(...prices);
+
+  const [minPrice, setMinPrice] = useState(defaultMinPrice.toString());
+  const [maxPrice, setMaxPrice] = useState(defaultMaxPrice.toString());
   const [selectedLocation, setSelectedLocation] = useState("");
-  const locations = ["Lublin", "Warszawa"];
+
   const locationItems = locations.map((location) => {
     return {
       label: location,
@@ -25,14 +44,18 @@ const Filters = ({ navigation }) => {
     };
   });
 
-  const submitFilters = () => {
-    console.log(minPrice, maxPrice, selectedLocation);
-    // redux action
-  };
+  const submitFilters = useCallback(() => {
+    const appliedFilters = {
+      minPrice: parseInt(minPrice),
+      maxPrice: parseInt(maxPrice),
+      city: selectedLocation,
+    };
+    dispatch(setFilters(appliedFilters));
+  }, [minPrice, maxPrice, selectedLocation, dispatch]);
 
   const clearFilters = () => {
-    setMinPrice("0");
-    setMaxPrice("1000");
+    setMinPrice(defaultMinPrice);
+    setMaxPrice(defaultMaxPrice);
     setSelectedLocation("");
   };
 
@@ -51,65 +74,75 @@ const Filters = ({ navigation }) => {
     setMaxPrice(values[1].toString());
   };
 
+  if (rooms == undefined) {
+    <ActivityIndicator size="large" color="black" />;
+  }
+
   return (
     <View style={styles.screen}>
       <Text_Roboto_Bold style={styles.title}>Filtry</Text_Roboto_Bold>
       <View style={styles.formContainer}>
-        <Text_Roboto_Medium style={styles.locationTitle}>
-          Lokalizacja
-        </Text_Roboto_Medium>
-        <DropDownPicker
-          placeholder="Wybierz"
-          items={locationItems}
-          defaultValue={selectedLocation ? selectedLocation : null}
-          containerStyle={{ height: 50 }}
-          style={{ backgroundColor: AppStyles.color.sliderLabelPriceBg }}
-          itemStyle={{
-            justifyContent: "flex-start",
-          }}
-          onChangeItem={(item) => setSelectedLocation(item.value)}
-        />
-        <View style={styles.priceSliderContainer}>
-          <Text_Roboto_Medium style={styles.priceSliderTitle}>
-            Cena:
-          </Text_Roboto_Medium>
-          <MultiSlider
-            values={[parseInt(minPrice), parseInt(maxPrice)]}
-            onValuesChange={changeRangePrice}
-            min={0}
-            max={1000}
-            step={10}
-            sliderLength={200}
-            customMarker={() => (
-              <View
-                style={{
-                  height: 25,
-                  width: 25,
-                  backgroundColor: AppStyles.color.sliderMarkerColor,
-                  borderRadius: 12.5,
+        {rooms == undefined ? (
+          <ActivityIndicator size="large" color="red" />
+        ) : (
+          <>
+            <Text_Roboto_Medium style={styles.locationTitle}>
+              Lokalizacja
+            </Text_Roboto_Medium>
+            <DropDownPicker
+              placeholder="Wybierz"
+              items={locationItems}
+              defaultValue={selectedLocation ? selectedLocation : null}
+              containerStyle={{ height: 50 }}
+              style={{ backgroundColor: AppStyles.color.sliderLabelPriceBg }}
+              itemStyle={{
+                justifyContent: "flex-start",
+              }}
+              onChangeItem={(item) => setSelectedLocation(item.value)}
+            />
+            <View style={styles.priceSliderContainer}>
+              <Text_Roboto_Medium style={styles.priceSliderTitle}>
+                Cena:
+              </Text_Roboto_Medium>
+              <MultiSlider
+                values={[parseInt(minPrice), parseInt(maxPrice)]}
+                onValuesChange={changeRangePrice}
+                min={defaultMinPrice}
+                max={defaultMaxPrice}
+                step={10}
+                sliderLength={200}
+                customMarker={() => (
+                  <View
+                    style={{
+                      height: 25,
+                      width: 25,
+                      backgroundColor: AppStyles.color.sliderMarkerColor,
+                      borderRadius: 12.5,
+                    }}
+                  />
+                )}
+                trackStyle={{
+                  height: 5,
+                }}
+                selectedStyle={{
+                  backgroundColor: AppStyles.color.sliderSelectedColor,
+                }}
+                unselectedStyle={{
+                  backgroundColor: AppStyles.color.sliderUnselectedColor,
                 }}
               />
-            )}
-            trackStyle={{
-              height: 5,
-            }}
-            selectedStyle={{
-              backgroundColor: AppStyles.color.sliderSelectedColor,
-            }}
-            unselectedStyle={{
-              backgroundColor: AppStyles.color.sliderUnselectedColor,
-            }}
-          />
-        </View>
-        <View style={styles.priceShowContainer}>
-          <View>
-            <Text style={styles.priceBox}>{minPrice}</Text>
-          </View>
-          <View style={styles.lineBetween} />
-          <View>
-            <Text style={styles.priceBox}>{maxPrice}</Text>
-          </View>
-        </View>
+            </View>
+            <View style={styles.priceShowContainer}>
+              <View>
+                <Text style={styles.priceBox}>{minPrice}</Text>
+              </View>
+              <View style={styles.lineBetween} />
+              <View>
+                <Text style={styles.priceBox}>{maxPrice}</Text>
+              </View>
+            </View>
+          </>
+        )}
       </View>
       <Button
         title="Zastosuj"
