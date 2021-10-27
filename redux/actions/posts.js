@@ -57,3 +57,17 @@ export const setFilters = (filterSettings) => {
     filters: filterSettings,
   };
 };
+
+export const addPostToFav = (postId) => {
+  return {
+    type: actionsTypes.ADD_POST_TO_FAVOURITES,
+    postId,
+  };
+};
+
+export const removePostFromFav = (postId) => {
+  return {
+    type: actionsTypes.REMOVE_POST_FROM_FAVOURITES,
+    postId,
+  };
+};

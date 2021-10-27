@@ -4,6 +4,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { Ionicons } from "@expo/vector-icons";
 
 import RoomsNavigator from "../rooms/RoomsNavigator";
+import FavouritesNavigator from "../favourites/FavouritesNavigator";
 import FiltersNavigator from "../filters/FiltersNavigator";
 import LocationNavigator from "../location/LocationNavigator";
 import AuthNavigator from "../auth/AuthNavigator";
@@ -28,7 +29,17 @@ export default MainNavigator = () => {
         }}
       />
       <Drawer.Screen
-        name="MainFilters"
+        name="MainFavs"
+        component={FavouritesNavigator}
+        options={{
+          drawerLabel: "Obserwowane",
+          drawerIcon: (props) => (
+            <Ionicons name="heart" size={23} color={props.color} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="MainFavourites"
         component={FiltersNavigator}
         options={{
           drawerLabel: "Filtry",

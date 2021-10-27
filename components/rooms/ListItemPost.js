@@ -8,7 +8,16 @@ import formatDate from "../../services/utils/formatDate";
 import { AppStyles } from "../../constants/AppStyles";
 
 const ListItem = (props) => {
-  const { title, price, created_at, main_image, go_to_details } = props;
+  const {
+    title,
+    price,
+    created_at,
+    main_image,
+    go_to_details,
+    isFav,
+    addToFav,
+    removeFromFav,
+  } = props;
 
   return (
     <TouchableOpacity onPress={go_to_details}>
@@ -17,12 +26,21 @@ const ListItem = (props) => {
           <View style={styles.imageContainer}>
             <Image style={styles.image} source={{ uri: main_image }} />
             <View style={styles.followContainer}>
-              <IconButton
-                name="md-heart-outline"
-                size={38}
-                color={AppStyles.color.iconFavColor}
-                onTouch={() => {}}
-              />
+              {isFav ? (
+                <IconButton
+                  name="md-heart"
+                  size={38}
+                  color={AppStyles.color.iconFavColor}
+                  onTouch={removeFromFav}
+                />
+              ) : (
+                <IconButton
+                  name="md-heart-outline"
+                  size={38}
+                  color={AppStyles.color.iconFavColor}
+                  onTouch={addToFav}
+                />
+              )}
             </View>
           </View>
           <Text_Roboto_Medium numberOfLines={2} style={styles.title}>

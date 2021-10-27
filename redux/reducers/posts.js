@@ -3,6 +3,7 @@ import * as actionsTypes from "../constants";
 const initialState = {
   posts: [],
   filteredPosts: [],
+  favPosts: [],
 };
 
 const postsReducer = (state = initialState, action) => {
@@ -38,6 +39,20 @@ const postsReducer = (state = initialState, action) => {
         return false;
       });
       return { ...state, filteredPosts: updatedFilteredPosts };
+    case actionsTypes.ADD_POST_TO_FAVOURITES:
+      const post = state.posts.find((post) => post.id == action.postId);
+      return {
+        ...state,
+        favPosts: [...state.favPosts, post],
+      };
+    case actionsTypes.REMOVE_POST_FROM_FAVOURITES:
+      const updatedFavPosts = state.favPosts.filter(
+        (post) => post.id != action.postId
+      );
+      return {
+        ...state,
+        favPosts: updatedFavPosts,
+      };
     default:
       return state;
   }

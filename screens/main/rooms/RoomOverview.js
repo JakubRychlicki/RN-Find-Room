@@ -5,11 +5,15 @@ import HeaderButton from "../../../components/UI/HeaderButton";
 
 import { Text_Roboto_Bold } from "../../../components/UI/Text";
 import ListItemPost from "../../../components/rooms/ListItemPost";
+
 import { AppStyles } from "../../../constants/AppStyles";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { addPostToFav, removePostFromFav } from "../../../redux/actions/posts";
 
 const RoomsOverview = ({ navigation }) => {
+  const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts.filteredPosts);
+  const favPosts = useSelector((state) => state.posts.favPosts);
 
   const selectItemHandler = (id) => {
     navigation.navigate("RoomDetail", {
@@ -40,6 +44,9 @@ const RoomsOverview = ({ navigation }) => {
                 created_at={item.created_at}
                 main_image={item.images[0]}
                 go_to_details={() => selectItemHandler(item.id)}
+                isFav={favPosts.some((e) => e.id == item.id)}
+                addToFav={() => dispatch(addPostToFav(item.id))}
+                removeFromFav={() => dispatch(removePostFromFav(item.id))}
               />
             );
           }}
