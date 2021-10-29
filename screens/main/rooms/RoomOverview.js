@@ -1,12 +1,13 @@
 import React from "react";
-import { View, FlatList, StyleSheet } from "react-native";
+import { FlatList } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../../../components/UI/HeaderButton";
 
-import { Text_Roboto_Bold } from "../../../components/UI/Text";
+import ListTitlePosts from "../../../components/rooms/ListTitlePosts";
 import ListItemPost from "../../../components/rooms/ListItemPost";
+import EmptyList from "../../../components/rooms/EmptyList";
+import ContainerPosts from "../../../components/rooms/ContainerPosts";
 
-import { AppStyles } from "../../../constants/AppStyles";
 import { useSelector, useDispatch } from "react-redux";
 import { addPostToFav, removePostFromFav } from "../../../redux/actions/posts";
 
@@ -22,58 +23,34 @@ const RoomsOverview = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.screen}>
-      <View style={styles.container}>
-        <FlatList
-          ListHeaderComponent={() => {
-            return (
-              <View style={styles.countPosts}>
-                <Text_Roboto_Bold style={styles.countPostsText}>
-                  Liczba ogłoszeń: {posts.length}
-                </Text_Roboto_Bold>
-              </View>
-            );
-          }}
-          data={posts}
-          showsVerticalScrollIndicator={false}
-          renderItem={({ item }) => {
-            return (
-              <ListItemPost
-                title={item.title}
-                price={item.price}
-                created_at={item.created_at}
-                main_image={item.images[0]}
-                go_to_details={() => selectItemHandler(item.id)}
-                isFav={favPosts.some((e) => e.id == item.id)}
-                addToFav={() => dispatch(addPostToFav(item.id))}
-                removeFromFav={() => dispatch(removePostFromFav(item.id))}
-              />
-            );
-          }}
-        />
-      </View>
-    </View>
+    <ContainerPosts>
+      <FlatList
+        ListHeaderComponent={() => {
+          return <ListTitlePosts title={`Liczba ogłoszeń: ${posts.length}`} />;
+        }}
+        ListEmptyComponent={() => {
+          return <EmptyList message="Nie znaleziono żadnego ogłoszenia." />;
+        }}
+        data={posts}
+        showsVerticalScrollIndicator={false}
+        renderItem={({ item }) => {
+          return (
+            <ListItemPost
+              title={item.title}
+              price={item.price}
+              created_at={item.created_at}
+              main_image={item.images[0]}
+              go_to_details={() => selectItemHandler(item.id)}
+              isFav={favPosts.some((e) => e.id == item.id)}
+              addToFav={() => dispatch(addPostToFav(item.id))}
+              removeFromFav={() => dispatch(removePostFromFav(item.id))}
+            />
+          );
+        }}
+      />
+    </ContainerPosts>
   );
 };
-
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    backgroundColor: AppStyles.color.grayBg,
-  },
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  countPosts: {
-    paddingVertical: 10,
-  },
-  countPostsText: {
-    fontSize: 15,
-    color: "black",
-  },
-});
 
 export const screenOptions = (navData) => {
   return {
