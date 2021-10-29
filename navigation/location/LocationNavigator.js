@@ -4,9 +4,11 @@ import { createStackNavigator } from "@react-navigation/stack";
 import defaultStackNavOptions from "../options/defaultStackNavOptions";
 
 import LocationAddScreen, {
-  screenOptions,
+  screenOptions as addScreenOptions,
 } from "../../screens/main/location/LocationAdd";
-import LocationMap from "../../screens/main/location/LocationMap";
+import LocationMap, {
+  screenOptions as mapScreenOptions,
+} from "../../screens/main/location/LocationMap";
 
 const Stack = createStackNavigator();
 
@@ -16,9 +18,13 @@ export default LocationNavigator = () => {
       <Stack.Screen
         name="Add"
         component={LocationAddScreen}
-        options={screenOptions}
+        options={addScreenOptions}
       />
-      <Stack.Screen name="Map" component={LocationMap} />
+      <Stack.Screen
+        name="Map"
+        component={LocationMap}
+        options={mapScreenOptions}
+      />
     </Stack.Navigator>
   );
 };
