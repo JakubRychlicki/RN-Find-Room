@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Text_Roboto_Bold } from "../UI/Text";
 
-const ListTitlePosts = (props) => {
+const PostsTitle = (props) => {
   return (
     <View style={styles.titleContainer}>
       <Text_Roboto_Bold style={styles.title}>{props.title}</Text_Roboto_Bold>
@@ -10,7 +10,7 @@ const ListTitlePosts = (props) => {
   );
 };
 
-export default ListTitlePosts;
+export default PostsTitle;
 
 const styles = StyleSheet.create({
   titleContainer: {

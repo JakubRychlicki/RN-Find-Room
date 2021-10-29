@@ -7,7 +7,7 @@ import IconButton from "../UI/IconButton";
 import formatDate from "../../services/utils/formatDate";
 import { AppStyles } from "../../constants/AppStyles";
 
-const ListItem = (props) => {
+const PostItem = (props) => {
   const {
     title,
     price,
@@ -103,4 +103,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ListItem;
+export default PostItem;

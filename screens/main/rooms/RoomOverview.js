@@ -3,8 +3,8 @@ import { FlatList } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../../../components/UI/HeaderButton";
 
-import ListTitlePosts from "../../../components/rooms/ListTitlePosts";
-import ListItemPost from "../../../components/rooms/ListItemPost";
+import PostsTitle from "../../../components/rooms/PostsTitle";
+import PostItem from "../../../components/rooms/PostItem";
 import EmptyList from "../../../components/rooms/EmptyList";
 import ContainerPosts from "../../../components/rooms/ContainerPosts";
 
@@ -26,7 +26,7 @@ const RoomsOverview = ({ navigation }) => {
     <ContainerPosts>
       <FlatList
         ListHeaderComponent={() => {
-          return <ListTitlePosts title={`Liczba ogłoszeń: ${posts.length}`} />;
+          return <PostsTitle title={`Liczba ogłoszeń: ${posts.length}`} />;
         }}
         ListEmptyComponent={() => {
           return <EmptyList message="Nie znaleziono żadnego ogłoszenia." />;
@@ -35,7 +35,7 @@ const RoomsOverview = ({ navigation }) => {
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => {
           return (
-            <ListItemPost
+            <PostItem
               title={item.title}
               price={item.price}
               created_at={item.created_at}

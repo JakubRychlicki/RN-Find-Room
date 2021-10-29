@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 export default IconButton = (props) => {
   return (
-    <TouchableOpacity onPress={props.onTouch}>
+    <TouchableOpacity onPress={props.onTouch} style={props.styles}>
       <Ionicons name={props.name} size={props.size} color={props.color} />
     </TouchableOpacity>
   );

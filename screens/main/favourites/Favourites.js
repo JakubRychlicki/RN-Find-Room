@@ -2,8 +2,8 @@ import React from "react";
 import { FlatList } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../../../components/UI/HeaderButton";
-import ListTitlePosts from "../../../components/rooms/ListTitlePosts";
-import ListItemPost from "../../../components/rooms/ListItemPost";
+import PostsTitle from "../../../components/rooms/PostsTitle";
+import PostItem from "../../../components/rooms/PostItem";
 import EmptyList from "../../../components/rooms/EmptyList";
 import ContainerPosts from "../../../components/rooms/ContainerPosts";
 
@@ -26,7 +26,7 @@ const Favourites = ({ navigation }) => {
         data={favPosts}
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={() => {
-          return <ListTitlePosts title={`Obserwujesz(${favPosts.length})`} />;
+          return <PostsTitle title={`Obserwujesz(${favPosts.length})`} />;
         }}
         ListEmptyComponent={() => {
           return (
@@ -35,7 +35,7 @@ const Favourites = ({ navigation }) => {
         }}
         renderItem={({ item }) => {
           return (
-            <ListItemPost
+            <PostItem
               title={item.title}
               price={item.price}
               created_at={item.created_at}
