@@ -15,7 +15,7 @@ const LocationListDistance = (props) => {
       </Text_Roboto_Medium>
       <FlatList
         data={props.locations}
-        ItemSeparatorComponent={<Separator />}
+        ItemSeparatorComponent={() => <Separator />}
         renderItem={({ item }) => {
           return (
             <LocationItem

@@ -64,6 +64,7 @@ const styles = StyleSheet.create({
   },
   distanceText: {
     fontSize: 18,
+    paddingLeft: 5,
   },
 });
 

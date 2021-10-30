@@ -59,7 +59,7 @@ const LocationAdd = ({ navigation }) => {
       </View>
       <FlatList
         data={locations}
-        ItemSeparatorComponent={<Separator />}
+        ItemSeparatorComponent={() => <Separator />}
         renderItem={({ item }) => {
           return (
             <LocationItem
