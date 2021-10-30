@@ -1,8 +1,6 @@
 import React from "react";
 import { View } from "react-native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { HeaderButtons, Item } from "react-navigation-header-buttons";
-import HeaderButton from "../../components/UI/HeaderButton";
 
 import { AppStyles } from "../../constants/AppStyles";
 
@@ -46,25 +44,6 @@ export const AuthTabNavigator = () => {
   );
 };
 
-const Auth = () => {
+export default Auth = () => {
   return <AuthTabNavigator />;
 };
-
-export const screenOptions = (navData) => {
-  return {
-    headerTitle: "",
-    headerLeft: () => (
-      <HeaderButtons HeaderButtonComponent={HeaderButton}>
-        <Item
-          title="Menu"
-          iconName="md-menu"
-          onPress={() => {
-            navData.navigation.toggleDrawer();
-          }}
-        />
-      </HeaderButtons>
-    ),
-  };
-};
-
-export default Auth;

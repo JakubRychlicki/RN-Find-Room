@@ -1,7 +1,5 @@
 import React from "react";
 import { FlatList } from "react-native";
-import { HeaderButtons, Item } from "react-navigation-header-buttons";
-import HeaderButton from "../../../components/UI/HeaderButton";
 
 import PostsTitle from "../../../components/rooms/PostsTitle";
 import PostItem from "../../../components/rooms/PostItem";
@@ -50,23 +48,6 @@ const RoomsOverview = ({ navigation }) => {
       />
     </ContainerPosts>
   );
-};
-
-export const screenOptions = (navData) => {
-  return {
-    headerTitle: "",
-    headerLeft: () => (
-      <HeaderButtons HeaderButtonComponent={HeaderButton}>
-        <Item
-          title="Menu"
-          iconName="md-menu"
-          onPress={() => {
-            navData.navigation.toggleDrawer();
-          }}
-        />
-      </HeaderButtons>
-    ),
-  };
 };
 
 export default RoomsOverview;

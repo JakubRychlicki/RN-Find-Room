@@ -7,6 +7,7 @@ import RoomsNavigator from "../rooms/RoomsNavigator";
 import FavouritesNavigator from "../favourites/FavouritesNavigator";
 import FiltersNavigator from "../filters/FiltersNavigator";
 import LocationNavigator from "../location/LocationNavigator";
+import AddPostNavigator from "../addPost/AddPostNavigator";
 import AuthNavigator from "../auth/AuthNavigator";
 
 import Logout from "../../screens/auth/Logout";
@@ -70,16 +71,28 @@ export default MainNavigator = () => {
           }}
         />
       ) : (
-        <Drawer.Screen
-          name="Logout"
-          component={Logout}
-          options={{
-            drawerLabel: "Wyloguj się",
-            drawerIcon: (props) => (
-              <Ionicons name="person" size={23} color={props.color} />
-            ),
-          }}
-        />
+        <>
+          <Drawer.Screen
+            name="MainAddPost"
+            component={AddPostNavigator}
+            options={{
+              drawerLabel: "Dodaj ogłoszenie",
+              drawerIcon: (props) => (
+                <Ionicons name="newspaper" size={23} color={props.color} />
+              ),
+            }}
+          />
+          <Drawer.Screen
+            name="Logout"
+            component={Logout}
+            options={{
+              drawerLabel: "Wyloguj się",
+              drawerIcon: (props) => (
+                <Ionicons name="person" size={23} color={props.color} />
+              ),
+            }}
+          />
+        </>
       )}
     </Drawer.Navigator>
   );

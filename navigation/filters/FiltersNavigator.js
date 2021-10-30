@@ -2,10 +2,9 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import defaultStackNavOptions from "../options/defaultStackNavOptions";
+import defaultScreenOptions from "../options/defaultScreenOptions";
 
-import FiltersScreen, {
-  screenOptions,
-} from "../../screens/main/filters/Filters";
+import FiltersScreen from "../../screens/main/filters/Filters";
 
 const Stack = createStackNavigator();
 
@@ -15,7 +14,7 @@ export default FiltersNavigator = () => {
       <Stack.Screen
         name="Filters"
         component={FiltersScreen}
-        options={screenOptions}
+        options={defaultScreenOptions}
       />
     </Stack.Navigator>
   );

@@ -115,8 +115,6 @@ const Register = () => {
   );
 };
 
-export default Register;
-
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
@@ -134,3 +132,5 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
 });
+
+export default Register;

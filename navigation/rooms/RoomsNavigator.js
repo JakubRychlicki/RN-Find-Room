@@ -2,10 +2,9 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import defaultStackNavOptions from "../options/defaultStackNavOptions";
+import defaultScreenOptions from "../options/defaultScreenOptions";
 
-import RoomsOverviewScreen, {
-  screenOptions as RoomsOverviewScreenOptions,
-} from "../../screens/main/rooms/RoomOverview";
+import RoomsOverviewScreen from "../../screens/main/rooms/RoomOverview";
 
 import RoomDetailScreen, {
   screenOptions as RoomDetailScreenOptions,
@@ -19,7 +18,7 @@ export default RoomsNavigator = () => {
       <Stack.Screen
         name="Rooms"
         component={RoomsOverviewScreen}
-        options={RoomsOverviewScreenOptions}
+        options={defaultScreenOptions}
       />
       <Stack.Screen
         name="RoomDetail"

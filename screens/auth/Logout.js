@@ -3,9 +3,11 @@ import React, { useEffect } from "react";
 
 export default Logout = () => {
   useEffect(() => {
-    const logout = firebase.auth().signOut();
+    async function logoutUser() {
+      const logout = await firebase.auth().signOut();
+    }
 
-    return logout;
+    logoutUser();
   }, []);
 
   return null;

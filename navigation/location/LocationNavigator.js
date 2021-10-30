@@ -2,10 +2,9 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import defaultStackNavOptions from "../options/defaultStackNavOptions";
+import defaultScreenOptions from "../options/defaultScreenOptions";
 
-import LocationAddScreen, {
-  screenOptions as addScreenOptions,
-} from "../../screens/main/location/LocationAdd";
+import LocationAddScreen from "../../screens/main/location/LocationAdd";
 import LocationMap, {
   screenOptions as mapScreenOptions,
 } from "../../screens/main/location/LocationMap";
@@ -18,7 +17,7 @@ export default LocationNavigator = () => {
       <Stack.Screen
         name="Add"
         component={LocationAddScreen}
-        options={addScreenOptions}
+        options={defaultScreenOptions}
       />
       <Stack.Screen
         name="Map"

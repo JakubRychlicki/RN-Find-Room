@@ -7,8 +7,6 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from "react-native";
-import { HeaderButtons, Item } from "react-navigation-header-buttons";
-import HeaderButton from "../../../components/UI/HeaderButton";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import DropDownPicker from "react-native-custom-dropdown";
 
@@ -19,6 +17,7 @@ import {
 import Button from "../../../components/UI/Button";
 
 import { AppStyles } from "../../../constants/AppStyles";
+
 import { setFilters } from "../../../redux/actions/posts";
 
 const Filters = ({ navigation }) => {
@@ -209,22 +208,5 @@ const styles = StyleSheet.create({
     marginTop: "auto",
   },
 });
-
-export const screenOptions = (navData) => {
-  return {
-    headerTitle: "",
-    headerLeft: () => (
-      <HeaderButtons HeaderButtonComponent={HeaderButton}>
-        <Item
-          title="Menu"
-          iconName="md-menu"
-          onPress={() => {
-            navData.navigation.toggleDrawer();
-          }}
-        />
-      </HeaderButtons>
-    ),
-  };
-};
 
 export default Filters;

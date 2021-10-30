@@ -78,8 +78,6 @@ const Login = () => {
   );
 };
 
-export default Login;
-
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
@@ -98,3 +96,5 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
 });
+
+export default Login;

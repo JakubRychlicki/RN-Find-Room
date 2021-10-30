@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import uuid from "react-native-uuid";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
 
-import Layout from "../../../constants/Layout";
-import { AppStyles } from "../../../constants/AppStyles";
 import {
   Text_Roboto_Bold,
   Text_Roboto_Medium,
@@ -12,21 +11,36 @@ import {
 import Button from "../../../components/UI/Button";
 import IconButton from "../../../components/UI/IconButton";
 
+import Layout from "../../../constants/Layout";
+import { AppStyles } from "../../../constants/AppStyles";
+
+import { useDispatch } from "react-redux";
+import { addLocation } from "../../../redux/actions/locations";
+
 const initialRegion = {
   lat: 52.22977,
   lng: 21.01178,
 };
 
 const LocationMap = ({ navigation }) => {
-  const mapRef = useRef(null);
+  const dispatch = useDispatch();
   const [currentLocation, setCurrentLocation] = useState(null);
   const [nameLocation, setNameLocation] = useState("");
 
   const onAddLocation = () => {
-    if (location === null) {
+    if (currentLocation === null && nameLocation === "") {
       return;
     }
-    console.log(nameLocation, currentLocation);
+    let newLocation = {
+      coordinates: {
+        lat: currentLocation.latitude,
+        lng: currentLocation.longitude,
+      },
+      name: nameLocation,
+      id: uuid.v4(),
+    };
+    dispatch(addLocation(newLocation));
+    navigation.goBack();
   };
 
   const geocodeCordinates = async () => {
@@ -74,9 +88,8 @@ const LocationMap = ({ navigation }) => {
       />
 
       <MapView
-        ref={mapRef}
+        mapType="standard"
         style={styles.mapContainer}
-        mapType="mutedStandard"
         initialRegion={{
           latitude: initialRegion.lat,
           longitude: initialRegion.lng,
@@ -139,7 +152,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const screenOptions = (navData) => {
+export const screenOptions = () => {
   return {
     headerShown: false,
   };
