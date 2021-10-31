@@ -28,16 +28,9 @@
     "web": {
       "favicon": "./assets/favicon.png",
       "config": {
-        "firebase": {
-          "apiKey": "AIzaSyDVbERta9txNvebNJuSd-8gEGwjvPv5P6s",
-          "authDomain": "find-room-6e61c.firebaseapp.com",
-          "projectId": "find-room-6e61c",
-          "storageBucket": "find-room-6e61c.appspot.com",
-          "messagingSenderId": "877456270882",
-          "appId": "1:877456270882:web:12dc4072581d99bd678c7b"
-        },
+        "firebase": { },
         "googleMaps": {
-          "apiKey": "AIzaSyAFMDjRGqiNVssE0YYd9EzFcSsh1-UFogE"
+          "apiKey": "your_google_maps_api_key"
         }
       }
     }
