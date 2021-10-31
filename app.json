@@ -35,6 +35,9 @@
           "storageBucket": "find-room-6e61c.appspot.com",
           "messagingSenderId": "877456270882",
           "appId": "1:877456270882:web:12dc4072581d99bd678c7b"
+        },
+        "googleMaps": {
+          "apiKey": "AIzaSyAFMDjRGqiNVssE0YYd9EzFcSsh1-UFogE"
         }
       }
     }

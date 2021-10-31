@@ -1,3 +1,4 @@
+import Constants from "expo-constants";
 import React from "react";
 import { StyleSheet } from "react-native";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
@@ -15,9 +16,10 @@ const SearchPlace = (props) => {
       fetchDetails={true}
       returnKeyType="search"
       query={{
-        key: "AIzaSyAFMDjRGqiNVssE0YYd9EzFcSsh1-UFogE",
+        key: Constants.manifest.web.config.googleMaps.apiKey,
         language: "pl",
         components: "country:pl",
+        types: ["(cities)"],
       }}
     />
   );

@@ -1,3 +1,4 @@
+import Constants from "expo-constants";
 import uuid from "react-native-uuid";
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
@@ -44,7 +45,7 @@ const LocationMap = ({ navigation }) => {
   };
 
   const geocodeCordinates = async () => {
-    Location.setGoogleApiKey("AIzaSyAFMDjRGqiNVssE0YYd9EzFcSsh1-UFogE");
+    Location.setGoogleApiKey(Constants.manifest.web.config.googleMaps.apiKey);
     let address = await Location.reverseGeocodeAsync(
       {
         longitude: currentLocation.longitude,

@@ -1,3 +1,4 @@
+import Constants from "expo-constants";
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, ScrollView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
@@ -12,7 +13,7 @@ const LocationItem = (props) => {
 
   const getTravelDistance = async () => {
     fetch(
-      `https://maps.googleapis.com/maps/api/distancematrix/json?destinations=${props.location1.latitude}%2C${props.location1.longitude}&origins=${props.location2.lat}%2C${props.location2.lng}&key=AIzaSyAFMDjRGqiNVssE0YYd9EzFcSsh1-UFogE`
+      `https://maps.googleapis.com/maps/api/distancematrix/json?destinations=${props.location1.latitude}%2C${props.location1.longitude}&origins=${props.location2.lat}%2C${props.location2.lng}&key=${Constants.manifest.web.config.googleMaps.apiKey}`
     )
       .then((res) => res.json())
       .then((data) => {
